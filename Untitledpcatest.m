@@ -1,0 +1,12 @@
+i=imread('C:\Users\hp\Desktop\project on watermarking\database\standard_test_images\house.tif');
+%i=rgb2gray(i);
+i=im2double(i);
+meani=mean(i);
+i=i-5;
+[coeff,score]=pca(i,'Algorithm','eig','Rows','Complete');
+t = score*coeff'+repmat(meani,512,1) ;
+imshow(t);
+figure;imshow(i);
+figure;imshow(score);
+figure;imshow(coeff);
+c=psnr(t,i);
